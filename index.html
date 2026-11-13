@@ -2,162 +2,234 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LA AUTOPSIA DE LEO - V2</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>LA AUTOPSIA DE LEO - LABERINTO</title>
 <style>
-*{box-sizing:border-box}
-body{margin:0;background:#0b0b12;color:white;font-family:'Segoe UI',Arial,sans-serif;overflow-x:hidden}
-.fondo{position:fixed;inset:0;z-index:-1;background:radial-gradient(circle at 20% 20%,#3a0a0a,transparent 40%),radial-gradient(circle at 80% 80%,#0a2a4a,transparent 40%),#0b0b12}
-.contenedor{max-width:750px;margin:0 auto;padding:16px;text-align:center;min-height:100vh;display:flex;flex-direction:column;justify-content:center}
-h1{font-size:38px;margin:5px;letter-spacing:2px}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:#07070f;color:white;font-family:'Segoe UI',Arial,sans-serif;overflow-x:hidden}
+.fondo{position:fixed;inset:0;z-index:-1;background:radial-gradient(circle at 15% 15%,#4a0a2a 0%,transparent 40%),radial-gradient(circle at 85% 85%,#0a2a4a 0%,transparent 40%),#07070f}
+.cont{max-width:620px;margin:0 auto;padding:12px;text-align:center}
+h1{font-size:32px;margin:6px 0;letter-spacing:1px;line-height:1}
 h1 span{color:#ff2a2a}
-.carta{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:20px;margin:14px 0;animation:aparecer .6s;box-shadow:0 10px 40px rgba(0,0,0,.5)}
-@keyframes aparecer{from{opacity:0;transform:scale(.92) translateY(15px)}to{opacity:1;transform:scale(1) translateY(0)}}
-.cita{background:#1a1a28;border-left:4px solid #ff2a2a;padding:12px;margin:12px 0;font-style:italic;text-align:left;border-radius:0 12px 12px 0}
-.concepto{background:#ff2a2a22;border:1px dashed #ff2a2a;padding:12px;border-radius:12px;font-size:14px;text-align:left}
-.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.stat{background:#222;border-radius:12px;padding:8px;font-size:13px;text-align:left}
-.barra{height:12px;background:#333;border-radius:10px;overflow:hidden;margin-top:4px}
-.relleno{height:100%;transition:width .8s;background:linear-gradient(90deg,#ff2a2a,#ffd166)}
-button{width:100%;padding:15px;margin:7px 0;border:none;border-radius:14px;font-size:16px;font-weight:bold;cursor:pointer;transition:.2s}
-button:active{transform:scale(.97)}
-.btn-blanca{background:white;color:#111}.btn-roja{background:#c1121f;color:white}.btn-azul{background:#1d3557;color:white}.btn-verde{background:#2a9d8f;color:white}.btn-amarillo{background:#e9c46a;color:#111}
-button:hover{filter:brightness(1.15);transform:translateY(-2px)}
-.nivel{font-size:12px;letter-spacing:2px;color:#ffd166}
-.shake{animation:shake .4s}
-@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
-.badge{display:inline-block;background:#ffd166;color:#111;padding:6px 14px;border-radius:20px;font-weight:bold}
-small{color:#aaa}
-.escena{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:10px 0}
-.muneco{font-size:62px;animation:flotar2 2s infinite;display:flex;flex-direction:column;align-items:center}
-.muneco span{font-size:12px;background:#0008;padding:3px 8px;border-radius:20px;margin-top:-8px}
-.muneco:nth-child(2){animation-delay:.4s}.muneco:nth-child(3){animation-delay:.8s}
-@keyframes flotar2{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-.corazon{font-size:60px;animation:latir 1.1s infinite}
+.sub{color:#ccc;font-style:italic;font-size:14px}
+.carta{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.25);border-radius:22px;padding:16px;margin:12px 0;box-shadow:0 10px 40px rgba(0,0,0,.6);animation:ap .5s}
+@keyframes ap{from{opacity:0;transform:scale(.95) translateY(10px)}to{opacity:1;transform:scale(1)}}
+.burbuja{background:white;color:#111;padding:10px 14px;border-radius:18px;border-bottom-left-radius:4px;display:inline-block;margin:8px;font-weight:bold}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
+.stat{background:#1c1c2b;border-radius:12px;padding:8px;font-size:12px;text-align:left}
+.barra{height:10px;background:#333;border-radius:10px;overflow:hidden;margin-top:4px}
+.relleno{height:100%;background:linear-gradient(90deg,#ff2a2a,#ffd166);transition:width .5s}
+button{width:100%;padding:14px;margin:6px 0;border:none;border-radius:14px;font-size:16px;font-weight:bold;cursor:pointer}
+.btn-roja{background:#c1121f;color:white}.btn-blanca{background:white;color:#111}.btn-verde{background:#2a9d8f;color:white}.btn-azul{background:#1d3557;color:white}.btn-amarillo{background:#e9c46a;color:#111}
+canvas{width:100%;max-width:460px;aspect-ratio:1/1;background:#111126;border:3px solid #fff3;border-radius:18px;display:block;margin:10px auto;box-shadow:0 0 30px rgba(255,42,42,.3)}
+.controls{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;max-width:280px;margin:10px auto}
+.controls button{background:#2a2a3d;color:white;font-size:24px;padding:12px;border:2px solid #fff2}
+.controls button:active{background:#ff2a2a;transform:scale(.95)}
+.controls .vacio{background:transparent;border:none}
+.pill{display:inline-block;background:#ffd166;color:#111;padding:5px 12px;border-radius:20px;font-weight:bold;font-size:13px;margin:3px}
+.leyenda{font-size:13px;color:#ddd;line-height:1.5;text-align:left;background:#0005;padding:10px;border-radius:12px}
+.mini{font-size:36px;line-height:1}
+.corazon{font-size:50px;animation:latir 1s infinite;display:inline-block}
 @keyframes latir{0%,100%{transform:scale(1)}50%{transform:scale(1.25)}}
-.burbuja{background:white;color:#111;padding:10px 14px;border-radius:18px;border-bottom-left-radius:4px;display:inline-block;margin:8px;font-weight:bold;animation:aparecer .5s}
-.puertas{display:flex;gap:16px;justify-content:center;margin:14px 0}
-.puerta{width:130px;height:190px;border-radius:14px 14px 6px 6px;position:relative;cursor:pointer;overflow:hidden;border:4px solid #fff3;transition:.3s;display:flex;align-items:flex-end;justify-content:center;padding-bottom:12px;font-weight:900;font-size:14px}
-.puerta:hover{transform:scale(1.05)}
-.puerta-blanca{background:linear-gradient(#fff,#cfd8ff);color:#222}
-.puerta-roja{background:linear-gradient(#ff2a2a,#7a0000);color:white}
-.puerta .manija{position:absolute;right:10px;top:50%;width:12px;height:12px;background:gold;border-radius:50%}
-.puerta.abierta{transform:perspective(500px) rotateY(35deg);opacity:.9}
-.puerta .adentro{position:absolute;inset:0;display:none;align-items:center;justify-content:center;font-size:40px;background:#000}
-.puerta.abierta .adentro{display:flex}
-.hospital{font-size:70px;animation:latir 1.5s infinite}
-.cerebro{font-size:70px;animation:flotar2 2s infinite}
-.camino{display:flex;align-items:center;justify-content:center;gap:6px;font-size:28px;margin:10px 0;flex-wrap:wrap}
-.paso{width:42px;height:42px;border-radius:50%;background:#333;display:flex;align-items:center;justify-content:center;font-size:18px}
-.paso.activo{background:#ff2a2a;animation:latir 1s infinite}
-.flecha{animation:flotar2 1s infinite}
 </style>
 </head>
 <body>
 <div class="fondo"></div>
-<div class="contenedor"><div id="juego"></div></div>
+<div class="cont"><div id="juego"></div></div>
 <script>
 let S={libertad:50,identidad:50,autoestima:50,vinculos:50};
+let nivelActual=0, corazones=0, corazonesTotal=0, vidas=3;
+let jugador={x:1,y:1}, salida={x:0,y:0}, fantasmas=[], intervaloFantasma=null;
+let mapas=[
+  // NIVEL 1 - LIBERTAD
+  {titulo:"NIVEL 1 - LABERINTO BLANCO 🤍 - LIBERTAD", intro:"Leo está perdido entre Beatrice y Silvia. Recoge 3 corazones ❤️ y llega a la puerta 🚪. ¡No dejes que el fantasma 👻 de la duda te atrape!", mapa:[
+    [1,1,1,1,1,1,1,1,1,1,1,1,1],
+    [1,0,0,0,1,0,2,0,1,0,0,0,1],
+    [1,0,1,0,1,0,1,0,1,0,1,0,1],
+    [1,0,1,0,0,0,1,0,0,0,1,0,1],
+    [1,0,1,1,1,0,1,1,1,0,1,0,1],
+    [1,0,0,0,0,0,0,0,1,0,0,0,1],
+    [1,1,1,0,1,1,1,0,1,1,1,0,1],
+    [1,0,0,0,1,0,0,0,0,0,1,0,1],
+    [1,0,1,1,1,0,1,1,1,0,1,0,1],
+    [1,0,0,0,0,0,1,0,2,0,0,0,1],
+    [1,0,1,1,1,0,1,0,1,1,1,0,1],
+    [1,0,0,0,1,0,0,0,0,0,2,0,3],
+    [1,1,1,1,1,1,1,1,1,1,1,1,1]
+  ], fantasma:{x:6,y:5}},
+  // NIVEL 2 - IDENTIDAD / AUTOESTIMA
+  {titulo:"NIVEL 2 - LABERINTO DE ESPEJOS 🪞 - IDENTIDAD", intro:"¿Quién soy sin Beatrice? Recoge 3 espejos 🪞 y llega a la puerta. Tu identidad se está construyendo en cada paso.", mapa:[
+    [1,1,1,1,1,1,1,1,1,1,1,1,1],
+    [1,0,0,1,0,0,0,1,0,2,0,0,1],
+    [1,0,1,1,0,1,0,1,0,1,1,0,1],
+    [1,0,0,0,0,1,0,0,0,0,0,0,1],
+    [1,1,1,0,1,1,1,0,1,1,1,0,1],
+    [1,0,0,0,0,0,1,0,0,0,1,0,1],
+    [1,0,1,1,1,0,1,1,1,0,1,0,1],
+    [1,0,0,0,1,0,0,0,1,0,0,0,1],
+    [1,0,1,0,1,1,1,0,1,1,1,0,1],
+    [1,0,1,0,0,0,0,0,0,0,1,2,1],
+    [1,0,1,1,1,0,1,1,1,0,1,0,1],
+    [1,0,0,0,0,0,1,0,2,0,0,0,3],
+    [1,1,1,1,1,1,1,1,1,1,1,1,1]
+  ], fantasma:{x:5,y:6}},
+  // NIVEL 3 - VINCULOS
+  {titulo:"NIVEL 3 - LABERINTO ROJO ❤️ - VÍNCULOS", intro:"Ya casi sales. Recoge 3 abrazos 🤝 de tus amigos y tu profe, y llega al corazón final. ¡Pedir ayuda también es libertad!", mapa:[
+    [1,1,1,1,1,1,1,1,1,1,1,1,1],
+    [1,0,0,0,1,0,2,0,0,0,1,0,1],
+    [1,0,1,0,1,0,1,1,1,0,1,0,1],
+    [1,0,1,0,0,0,0,0,1,0,0,0,1],
+    [1,0,1,1,1,1,1,0,1,1,1,0,1],
+    [1,0,0,0,0,0,0,0,0,0,1,0,1],
+    [1,1,1,0,1,1,1,1,1,0,1,0,1],
+    [1,0,0,0,1,0,2,0,0,0,1,0,1],
+    [1,0,1,1,1,0,1,1,1,1,1,0,1],
+    [1,0,0,0,0,0,1,0,0,0,0,0,1],
+    [1,0,1,1,1,0,1,0,1,1,1,0,1],
+    [1,0,0,0,1,0,0,0,2,0,0,0,3],
+    [1,1,1,1,1,1,1,1,1,1,1,1,1]
+  ], fantasma:{x:6,y:7}}
+];
+
 function barras(){return `<div class="stats">
-<div class="stat">🤍 Libertad - 1er Corte<div class="barra"><div class="relleno" style="width:${S.libertad}%"></div></div>${S.libertad}%</div>
-<div class="stat">🧠 Identidad - 2do Corte<div class="barra"><div class="relleno" style="width:${S.identidad}%"></div></div>${S.identidad}%</div>
-<div class="stat">❤️ Autoestima - 2do Corte<div class="barra"><div class="relleno" style="width:${S.autoestima}%"></div></div>${S.autoestima}%</div>
-<div class="stat">🤝 Vínculos - 3er Corte<div class="barra"><div class="relleno" style="width:${S.vinculos}%"></div></div>${S.vinculos}%</div></div>`}
+<div class="stat">🤍 Libertad<div class="barra"><div class="relleno" style="width:${S.libertad}%"></div></div>${S.libertad}%</div>
+<div class="stat">🧠 Identidad<div class="barra"><div class="relleno" style="width:${S.identidad}%"></div></div>${S.identidad}%</div>
+<div class="stat">❤️ Autoestima<div class="barra"><div class="relleno" style="width:${S.autoestima}%"></div></div>${S.autoestima}%</div>
+<div class="stat">🤝 Vínculos<div class="barra"><div class="relleno" style="width:${S.vinculos}%"></div></div>${S.vinculos}%</div></div>`}
 function render(h){document.getElementById('juego').innerHTML=h}
-function elegir(ef,sig){for(let k in ef) S[k]=Math.max(0,Math.min(100,S[k]+ef[k]));document.getElementById('juego').classList.add('shake');setTimeout(()=>{document.getElementById('juego').classList.remove('shake');sig()},350)}
+
 function inicio(){
-render(`<div class="corazon">❤️‍🩹</div>
-<h1>LA AUTOPSIA <span>DE LEO</span></h1><p style="color:#ccc;font-style:italic">Blanca como la nieve, roja como la sangre</p>
-<div class="escena">
-<div class="muneco">👦<span>LEO</span></div>
-<div class="muneco">👩‍🦰<span>BEATRICE 🤍</span></div>
-<div class="muneco">👩<span>SILVIA ❤️</span></div>
-<div class="muneco">👨‍🏫<span>PROFE</span></div>
-</div>
-<div class="burbuja">👦 Leo: "Ya no sé quién soy..."</div>
-<div class="carta"><p>Leo ya no está. Tú entras a su <b>sala de autopsia emocional</b>.<br>En cada puerta vas a abrir una parte de él... y de ti.</p><p><b>¿Te atreves a abrirlo?</b></p></div>
-${barras()}
-<button class="btn-roja" onclick="nivel1()">🚪 ENTRAR AL HOSPITAL</button>
-<small>Persona • Libertad • Identidad • Autoestima • Personalidad • Familia y Amistad<br>Blanca como la nieve, roja como la sangre - Wonder - El Estudiante</small>`);
+  if(intervaloFantasma) clearInterval(intervaloFantasma);
+  S={libertad:50,identidad:50,autoestima:50,vinculos:50}; vidas=3;
+  render(`<div class="corazon">❤️‍🩹</div><h1>LA AUTOPSIA <span>DE LEO</span><br>LABERINTO</h1><p class="sub">Blanca como la nieve, roja como la sangre</p>
+  <div style="font-size:60px">👦 👩‍🦰 👩 👨‍🏫</div>
+  <div class="burbuja">👦 Leo: "Estoy perdido en mi propio laberinto..."</div>
+  <div class="carta"><p>Leo está atrapado en su cabeza.<br><b>Tú tienes que sacarlo.</b><br><br>3 laberintos = 3 cortes de tu clase</p>
+  <div class="leyenda">🤍 <b>Lab 1:</b> Libertad - 1er Corte<br>🧠 <b>Lab 2:</b> Identidad + Autoestima - 2do Corte<br>🤝 <b>Lab 3:</b> Vínculos - 3er Corte<br><br>❤️ Recoge corazones &nbsp; 👻 Esquiva al fantasma &nbsp; 🚪 Llega a la puerta</div></div>
+  ${barras()}
+  <button class="btn-roja" onclick="empezarLab(0)">🚪 ENTRAR AL LABERINTO</button>
+  <small>Persona • Libertad • Identidad • Autoestima • Personalidad • Familia y Amistad<br>Wonder - El Estudiante - Blanca como la nieve</small>`);
 }
-function nivel1(){
-render(`<div class="nivel">NIVEL 1 / 5 - LAS 2 PUERTAS</div>${barras()}
-<div class="carta"><h2>🚪 La Entrada - Libertad</h2>
-<div class="escena"><div class="muneco">👦<span>LEO DUDANDO</span></div></div>
-<div class="burbuja">👦 Leo: "¿A quién sigo? ¿A lo imposible o a lo real?"</div>
-<p><b>Elige una puerta, ¡se abre de verdad!</b></p>
-<div class="puertas">
-<div class="puerta puerta-blanca" onclick="this.classList.add('abierta');setTimeout(()=>elegir({libertad:-12,autoestima:-15,identidad:-8},nivel2),700)"><div class="manija"></div>🤍 BEATRICE<div class="adentro">👻</div></div>
-<div class="puerta puerta-roja" onclick="this.classList.add('abierta');setTimeout(()=>elegir({libertad:15,autoestima:10,identidad:8},nivel2),700)"><div class="manija"></div>❤️ SILVIA<div class="adentro">😍</div></div>
-</div>
-<p>🤍 <b>Blanca = Beatrice</b>, pura, enferma de leucemia, inalcanzable.<br>❤️ <b>Roja = Silvia</b>, real, viva, te está mirando.</p>
-<div class="cita">"El blanco es inocencia, el rojo es sangre, es vida."</div>
-<div class="concepto"><b>1er Corte - LIBERTAD:</b> Libertad no es hacer lo que quieras. Es libre albedrío: elegir con sentido y aceptar las consecuencias. Obsesionarte con Beatrice es huir de autodeterminarse.</div>
-</div>`);
+
+function empezarLab(n){
+  nivelActual=n; let m=mapas[n];
+  jugador={x:1,y:1}; corazones=0; corazonesTotal=0;
+  // contar items 2
+  m.mapa.forEach(f=>f.forEach(c=>{if(c==2) corazonesTotal++}));
+  fantasmas=[{x:m.fantasma.x,y:m.fantasma.y}];
+  // encontrar salida
+  m.mapa.forEach((f,y)=>f.forEach((c,x)=>{if(c==3) salida={x,y}}));
+  render(`<div style="font-size:12px;letter-spacing:2px;color:#ffd166">${m.titulo}</div>
+  <div><span class="pill">❤️ ${corazones}/${corazonesTotal}</span> <span class="pill">💛 Vidas: ${vidas}</span> <span class="pill">👦 Leo</span></div>
+  <div class="carta"><p style="margin:4px">${m.intro}</p></div>
+  ${barras()}
+  <canvas id="cv" width="390" height="390"></canvas>
+  <div class="controls">
+    <div class="vacio"></div><button onclick="mover(0,-1)">⬆️</button><div class="vacio"></div>
+    <button onclick="mover(-1,0)">⬅️</button><button onclick="mover(0,1)">⬇️</button><button onclick="mover(1,0)">➡️</button>
+  </div>
+  <div class="leyenda">🟦 Pared &nbsp; ⬜ Camino &nbsp; ❤️ / 🪞 / 🤝 Recoger &nbsp; 🚪 Salida (se abre con todos los ❤️)</div>`);
+  dibujar();
+  if(intervaloFantasma) clearInterval(intervaloFantasma);
+  intervaloFantasma=setInterval(moverFantasma, 650);
+  document.onkeydown=(e)=>{
+    if(e.key=="ArrowUp"||e.key=="w") mover(0,-1);
+    if(e.key=="ArrowDown"||e.key=="s") mover(0,1);
+    if(e.key=="ArrowLeft"||e.key=="a") mover(-1,0);
+    if(e.key=="ArrowRight"||e.key=="d") mover(1,0);
+  };
 }
-function nivel2(){
-render(`<div class="nivel">NIVEL 2 / 5 - EL CEREBRO 🧠</div>${barras()}
-<div class="carta"><h2>🧠 Identidad</h2>
-<div class="cerebro">🧠</div>
-<div class="escena"><div class="muneco">👦<span>LEO</span></div><div class="muneco">🧒<span>AUGGIE - WONDER</span></div></div>
-<div class="burbuja">📓 Diario de Leo: "Soy del montón, no soy nadie"</div>
-<p>Leo se define por a quién ama. Igual que <b>Auggie en Wonder</b> al inicio se define por su cara, por lo que los demás ven.</p>
-<div class="concepto"><b>2do Corte - IDENTIDAD:</b> Está en consolidación. Todavía no sabe quién es sin Beatrice, sin sus amigos, sin su profesor.</div></div>
-<button class="btn-blanca" onclick="elegir({identidad:-15,autoestima:-12},nivel3)">🪞 Soy lo que otros dicen de mí</button>
-<button class="btn-azul" onclick="elegir({identidad:20,autoestima:12,libertad:8},nivel3)">💪 Soy más que lo que otros ven</button>`);
+
+function dibujar(){
+  let cv=document.getElementById('cv'); if(!cv) return;
+  let ctx=cv.getContext('2d'); let m=mapas[nivelActual].mapa; let tam=30;
+  for(let y=0;y<13;y++) for(let x=0;x<13;x++){
+    let v=m[y][x];
+    if(v==1){ctx.fillStyle="#2b2b4a";ctx.fillRect(x*tam,y*tam,tam,tam);ctx.strokeStyle="#ffffff22";ctx.strokeRect(x*tam,y*tam,tam,tam);}
+    else{ctx.fillStyle="#e8e8f5";ctx.fillRect(x*tam,y*tam,tam,tam);ctx.strokeStyle="#00000010";ctx.strokeRect(x*tam,y*tam,tam,tam);}
+    if(v==2){ctx.font="20px Arial";ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(nivelActual==0?"❤️":nivelActual==1?"🪞":"🤝", x*tam+15, y*tam+16);}
+    if(v==3){ctx.font="20px Arial";ctx.textAlign="center";ctx.fillText(corazones>=corazonesTotal?"🚪":"🔒", x*tam+15, y*tam+20);}
+  }
+  // fantasmas
+  fantasmas.forEach(f=>{ctx.font="22px Arial";ctx.textAlign="center";ctx.fillText("👻", f.x*tam+15, f.y*tam+20);});
+  // jugador
+  ctx.font="22px Arial";ctx.textAlign="center";ctx.fillText("👦", jugador.x*tam+15, jugador.y*tam+20);
+  // HUD arriba
+  let hud=document.querySelector('.pill'); // no necesario
 }
-function nivel3(){
-render(`<div class="nivel">NIVEL 3 / 5 - EL CORAZÓN ❤️</div>${barras()}
-<div class="carta"><h2>❤️ Autoestima</h2>
-<div class="corazon">❤️</div>
-<div class="escena"><div class="muneco">👦<span>LEO TRISTE</span></div><div class="muneco">👴<span>CHANO - 70 AÑOS</span></div></div>
-<div class="burbuja">👦 Leo: "Parece que soy popular, pero por dentro no me siento suficiente"</div>
-<div class="cita">Fórmula de clase: <b>Autoestima = Competencia + Merecimiento</b></div>
-<p>Leo cree que no es competente para salvar a Beatrice, y que no merece a Silvia.</p>
-<p><b>Chano en El Estudiante</b> es lo contrario: a los 70 años sí se siente merecedor de aprender, de amar, de empezar de nuevo.</p>
-<div class="concepto"><b>Autoestima de Leo:</b> Baja positiva / Pseudodefensiva. Por fuera se ve bien, por dentro se siente insuficiente.</div></div>
-<button class="btn-blanca" onclick="elegir({autoestima:-18,vinculos:-5},nivel4)">😔 No merezco que me amen</button>
-<button class="btn-verde" onclick="elegir({autoestima:18,identidad:10},nivel4)">😊 Sí merezco ser amado, aunque no sea perfecto</button>`);
+
+function mover(dx,dy){
+  let m=mapas[nivelActual].mapa;
+  let nx=jugador.x+dx, ny=jugador.y+dy;
+  if(nx<0||ny<0||nx>=13||ny>=13) return;
+  if(m[ny][nx]==1) return;
+  jugador.x=nx; jugador.y=ny;
+  if(m[ny][nx]==2){
+    m[ny][nx]=0; corazones++;
+    if(nivelActual==0){S.libertad+=12;S.autoestima+=8;}
+    if(nivelActual==1){S.identidad+=12;S.autoestima+=10;}
+    if(nivelActual==2){S.vinculos+=12;S.autoestima+=8;}
+    for(let k in S) S[k]=Math.max(0,Math.min(100,S[k]));
+    // actualizar pills y barras sin recargar todo
+    let pills=document.querySelectorAll('.pill');
+    if(pills[0]) pills[0].textContent=`❤️ ${corazones}/${corazonesTotal}`;
+    let stats=document.querySelector('.stats'); if(stats) stats.outerHTML=barras();
+  }
+  // choque fantasma
+  if(fantasmas.some(f=>f.x==jugador.x && f.y==jugador.y)){
+    vidas--; if(vidas<=0){perder(); return;}
+    alert("👻 ¡Te atrapó el fantasma de la duda! Te quedan "+vidas+" vidas. Vuelves al inicio.");
+    jugador={x:1,y:1};
+    let pills=document.querySelectorAll('.pill'); if(pills[1]) pills[1].textContent=`💛 Vidas: ${vidas}`;
+  }
+  // salida
+  if(jugador.x==salida.x && jugador.y==salida.y){
+    if(corazones>=corazonesTotal){ganarLab(); return;}
+    else{alert("🔒 La puerta está cerrada. Te faltan "+(corazonesTotal-corazones)+" corazones."); jugador={x:salida.x-1,y:salida.y}; }
+  }
+  dibujar();
 }
-function nivel4(){
-render(`<div class="nivel">NIVEL 4 / 5 - LA SANGRE 🩸 - PERSONALIDAD</div>${barras()}
-<div class="carta"><h2>🩸 Personalidad - Big Five</h2>
-<div class="escena"><div class="muneco">😶‍🌫️<span>LEO ANSIOSO</span></div><div class="muneco">🤪<span>LEO CHISTOSO</span></div><div class="muneco">🥺<span>LEO ENAMORADO</span></div></div>
-<p style="text-align:left">• <b>Apertura:</b> Alta, sueña, escribe, imagina.<br>
-- <b>Responsabilidad:</b> Baja, no estudia, se escapa.<br>
-- <b>Extraversión:</b> Alta con amigos, baja con lo que siente.<br>
-- <b>Amabilidad:</b> Alta, cuida a Beatrice.<br>
-- <b>Neuroticismo:</b> Altísimo, ansiedad, miedo a la muerte, celos.</p>
-<div class="concepto"><b>Temperamento vs Carácter:</b> Leo nació sensible (temperamento). Su carácter se forma cuando decide cuidar y no solo desear.</div></div>
-<button class="btn-amarillo" onclick="elegir({libertad:10,identidad:10},nivel5)">🤲 Decido cuidar, no solo desear</button>
-<button class="btn-blanca" onclick="elegir({libertad:-10,vinculos:-10},nivel5)">👀 Sigo solo deseando, sin actuar</button>`);
+
+function moverFantasma(){
+  let m=mapas[nivelActual].mapa;
+  fantasmas.forEach(f=>{
+    let opciones=[[1,0],[-1,0],[0,1],[0,-1]].filter(([dx,dy])=>{let nx=f.x+dx, ny=f.y+dy; return nx>=0&&ny>=0&&nx<13&&ny<13&&m[ny][nx]!=1;});
+    // persigue un poco a Leo
+    opciones.sort((a,b)=>{
+      let da=Math.abs((f.x+a[0])-jugador.x)+Math.abs((f.y+a[1])-jugador.y);
+      let db=Math.abs((f.x+b[0])-jugador.x)+Math.abs((f.y+b[1])-jugador.y);
+      return da-db;
+    });
+    if(opciones.length && Math.random()<0.75){f.x+=opciones[0][0]; f.y+=opciones[0][1];}
+    if(f.x==jugador.x && f.y==jugador.y){
+      vidas--; if(vidas<=0){perder(); return;}
+      alert("👻 ¡Te atrapó! Te quedan "+vidas+" vidas");
+      jugador={x:1,y:1};
+      let pills=document.querySelectorAll('.pill'); if(pills[1]) pills[1].textContent=`💛 Vidas: ${vidas}`;
+    }
+  });
+  dibujar();
 }
-function nivel5(){
-render(`<div class="nivel">NIVEL 5 / 5 - LAS MANOS 🤲</div>${barras()}
-<div class="carta"><h2>🤲 Familia y Amistad</h2>
-<div class="camino"><div class="paso">👦</div><div class="flecha">➡️</div><div class="paso">👯</div><div class="flecha">➡️</div><div class="paso">👨‍🏫</div><div class="flecha">➡️</div><div class="paso activo">❤️</div></div>
-<div class="escena">
-<div class="muneco">👦<span>LEO SOLO</span></div>
-<div class="muneco">👯<span>AMIGOS</span></div>
-<div class="muneco">👩<span>MAMÁ</span></div>
-<div class="muneco">👨‍🏫<span>PROFE = PAPÁ EMOCIONAL</span></div>
-</div>
-<div class="burbuja">👨‍🏫 Profe: "Amar no es poseer, Leo. Amar es dejar libre."</div>
-<p><b>Amistad:</b> Sus amigos son su red de apoyo. Como en Wonder, donde Jack y Summer salvan a Auggie.</p>
-<p><b>Familia:</b> Su mamá y su profesor, que hace de padre emocional.</p>
-<div class="concepto"><b>3er Corte:</b> Sin vínculos sanos, la identidad se hunde. Pedir ayuda también es libertad.</div></div>
-<button class="btn-blanca" onclick="elegir({vinculos:-20,autoestima:-10},final)">🚪 Me encierro solo, no necesito a nadie</button>
-<button class="btn-verde" onclick="elegir({vinculos:22,autoestima:12,identidad:10},final)">🤝 Pido ayuda a mis amigos y a mi profesor</button>`);
+
+function ganarLab(){
+  clearInterval(intervaloFantasma);
+  if(nivelActual==0){
+    render(`<div class="carta"><div class="mini">🚪🤍❤️</div><h2>¡PASASTE EL LAB 1!</h2><p><b>LIBERTAD:</b> Elegiste no quedarte pegado a lo imposible. Libertad es elegir con sentido, no huir.</p><p class="burbuja">👦 Leo: "Ya no quiero solo desear, quiero decidir."</p>${barras()}<button class="btn-azul" onclick="empezarLab(1)">➡️ SIGUIENTE LABERINTO: IDENTIDAD</button></div>`);
+  } else if(nivelActual==1){
+    render(`<div class="carta"><div class="mini">🪞🧠❤️</div><h2>¡PASASTE EL LAB 2!</h2><p><b>IDENTIDAD + AUTOESTIMA:</b> Como Auggie en <b>Wonder</b>, ya no eres solo lo que otros ven. Eres competente y merecedor.</p><p><b>Personalidad:</b> Neuroticismo alto, pero tu carácter ya decide cuidar.</p>${barras()}<button class="btn-verde" onclick="empezarLab(2)">➡️ ÚLTIMO LABERINTO: VÍNCULOS</button></div>`);
+  } else {
+    final();
+  }
+}
+function perder(){
+  clearInterval(intervaloFantasma);
+  render(`<div class="carta"><div style="font-size:60px">👻</div><h2>LEO SE PERDIÓ EN EL LABERINTO</h2><p>El fantasma de la duda te atrapó 3 veces. Pero como <b>Chano en El Estudiante</b>, a los 70 años se puede volver a empezar.</p>${barras()}<button class="btn-roja" onclick="inicio()">🔁 VOLVER A INTENTAR</button></div>`);
 }
 function final(){
-let titulo,texto,nota,emoji;
-if(S.autoestima>=60 && S.vinculos>=55){titulo="FINAL ROJO - LEO APRENDE A AMAR";texto="Entendiste que amar no es poseer. Como Chano, te atreviste a empezar de nuevo. Tu autoestima subió porque te sentiste competente y merecedor. ¡Autoconocimiento logrado!";nota="NOTA: 5.0";emoji="🎉👦❤️"}
-else if(S.autoestima<40){titulo="FINAL BLANCO - LEO ATRAPADO";texto="Te quedaste en lo ideal. Buscaste merecimiento afuera, no adentro. Tu identidad se quedó pegada a otra persona. Reflexión: ¿Qué parte de Leo hay en ti?";nota="NOTA: 3.5 - Vuelve a intentarlo para el Final Rojo";emoji="🤍👻"}
-else{titulo="FINAL LEO REAL - EN CONSTRUCCIÓN";texto="Vas en camino. Ya no eres el Leo del inicio, pero aún te falta sostenerte en tus vínculos. Eso también es crecer.";nota="NOTA: 4.5 - Casi llegas al 5.0";emoji="❤️‍🩹👦"}
-render(`<div class="carta"><h2>${emoji}<br>${titulo}</h2><p>${texto}</p>${barras()}<span class="badge">${nota}</span>
-<div class="escena"><div class="muneco">👦<span>LEO FINAL</span></div><div class="muneco">👩<span>SILVIA</span></div><div class="muneco">👯<span>AMIGOS</span></div></div>
-<p><b>Reflexión final para la clase:</b><br>¿Qué parte de Leo reconoces en ti? Escríbelo, eso es autoconocimiento.</p></div>
-<button class="btn-roja" onclick="location.reload()">🔁 VOLVER A JUGAR</button>`);
+  let titulo, texto, nota, emoji;
+  if(S.autoestima>=60 && S.vinculos>=55){titulo="FINAL ROJO - LEO APRENDE A AMAR";texto="Saliste del laberinto. Entendiste que amar no es poseer, es dejar libre. Tu autoestima subió porque te sentiste competente y merecedor. Como Chano, te atreviste a empezar de nuevo.";nota="NOTA: 5.0";emoji="🎉👦❤️"}
+  else{titulo="FINAL EN CONSTRUCCIÓN - LEO CASI SALE";texto="Saliste del laberinto, pero aún te falta sostenerte en tus vínculos. Eso también es crecer. Vuelve a jugar y recoge todos los corazones.";nota="NOTA: 4.5 - Casi 5.0";emoji="❤️‍🩹👦"}
+  render(`<div class="carta"><h2>${emoji}<br>${titulo}</h2><p>${texto}</p>${barras()}<span class="pill">${nota}</span><div style="font-size:50px;margin:10px">👦 👩 👯 👨‍🏫</div><p><b>Reflexión final:</b><br>¿Qué parte de Leo reconoces en ti? Escríbelo, eso es autoconocimiento.</p></div><button class="btn-roja" onclick="inicio()">🔁 VOLVER A JUGAR</button>`);
 }
 inicio();
 </script>
