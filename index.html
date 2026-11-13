@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>LA AUTOPSIA DE LEO - LABERINTO DEFINITIVO</title>
+<title>LA AUTOPSIA DE LEO - LABERINTO</title>
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{margin:0;background:#05050a;color:white;font-family:'Segoe UI',Arial,sans-serif;overflow-x:hidden}
@@ -221,7 +221,6 @@ function empezarLab(n) {
   if (intervaloFantasma) clearInterval(intervaloFantasma);
   intervaloFantasma = setInterval(moverFantasma, 600);
 
-  // Control por teclado
   document.onkeydown = (e) => {
     if (["ArrowUp","w","W"].includes(e.key)) { mover(0,-1); e.preventDefault(); }
     if (["ArrowDown","s","S"].includes(e.key)) { mover(0,1); e.preventDefault(); }
@@ -253,7 +252,6 @@ function dibujar() {
   for (let y = 0; y < 13; y++) {
     for (let x = 0; x < 13; x++) {
       let v = m[y][x];
-      // Niebla de guerra para el Nivel 2
       let enNiebla = false;
       if (nivelActual == 1) {
         let dist = Math.hypot(jugador.x - x, jugador.y - y);
@@ -294,7 +292,6 @@ function dibujar() {
     }
   }
 
-  // Dibujar fantasmas con efecto flotante
   fantasmas.forEach(f => {
     ctx.font = "20px Arial"; 
     ctx.textAlign = "center"; 
@@ -303,7 +300,6 @@ function dibujar() {
     ctx.fillText("👻", f.x * tam + 15, f.y * tam + 16 + flotar);
   });
 
-  // Dibujar jugador con animación de pulso
   ctx.font = "21px Arial"; 
   ctx.textAlign = "center"; 
   ctx.textBaseline = "middle";
@@ -336,13 +332,11 @@ function mover(dx, dy) {
     if (statsDiv) statsDiv.outerHTML = barras();
   }
 
-  // Comprobar colisión con fantasma
   if (fantasmas.some(f => f.x == jugador.x && f.y == jugador.y)) {
     impactoFantasma();
     return;
   }
 
-  // Comprobar salida
   if (jugador.x == salida.x && jugador.y == salida.y) {
     if (corazones >= corazonesTotal) {
       ganarLab(); 
@@ -466,7 +460,6 @@ function final() {
   `);
 }
 
-// Inicializar juego al cargar
 inicio();
 </script>
 </body>
