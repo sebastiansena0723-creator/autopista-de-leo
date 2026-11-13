@@ -3,234 +3,470 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>LA AUTOPSIA DE LEO - LABERINTO</title>
+<title>LA AUTOPSIA DE LEO - LABERINTO DEFINITIVO</title>
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;background:#07070f;color:white;font-family:'Segoe UI',Arial,sans-serif;overflow-x:hidden}
-.fondo{position:fixed;inset:0;z-index:-1;background:radial-gradient(circle at 15% 15%,#4a0a2a 0%,transparent 40%),radial-gradient(circle at 85% 85%,#0a2a4a 0%,transparent 40%),#07070f}
+body{margin:0;background:#05050a;color:white;font-family:'Segoe UI',Arial,sans-serif;overflow-x:hidden}
+.fondo{position:fixed;inset:0;z-index:-1;background:radial-gradient(circle at 15% 15%,#3a051a 0%,transparent 40%),radial-gradient(circle at 85% 85%,#051a3a 0%,transparent 40%),#05050a}
 .cont{max-width:620px;margin:0 auto;padding:12px;text-align:center}
-h1{font-size:32px;margin:6px 0;letter-spacing:1px;line-height:1}
-h1 span{color:#ff2a2a}
-.sub{color:#ccc;font-style:italic;font-size:14px}
-.carta{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.25);border-radius:22px;padding:16px;margin:12px 0;box-shadow:0 10px 40px rgba(0,0,0,.6);animation:ap .5s}
-@keyframes ap{from{opacity:0;transform:scale(.95) translateY(10px)}to{opacity:1;transform:scale(1)}}
-.burbuja{background:white;color:#111;padding:10px 14px;border-radius:18px;border-bottom-left-radius:4px;display:inline-block;margin:8px;font-weight:bold}
+h1{font-size:30px;margin:6px 0;letter-spacing:1px;line-height:1}
+h1 span{color:#ff2a5f}
+.sub{color:#bbb;font-style:italic;font-size:13px}
+.carta{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:16px;margin:10px 0;box-shadow:0 10px 30px rgba(0,0,0,.6);animation:ap .4s cubic-bezier(0.175, 0.885, 0.32, 1.275)}
+@keyframes ap{from{opacity:0;transform:scale(.94) translateY(10px)}to{opacity:1;transform:scale(1)}}
+.burbuja{background:#fff;color:#111;padding:10px 14px;border-radius:18px;border-bottom-left-radius:4px;display:inline-block;margin:8px;font-weight:bold;font-size:14px;box-shadow:0 4px 15px rgba(255,255,255,.15)}
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
-.stat{background:#1c1c2b;border-radius:12px;padding:8px;font-size:12px;text-align:left}
-.barra{height:10px;background:#333;border-radius:10px;overflow:hidden;margin-top:4px}
-.relleno{height:100%;background:linear-gradient(90deg,#ff2a2a,#ffd166);transition:width .5s}
-button{width:100%;padding:14px;margin:6px 0;border:none;border-radius:14px;font-size:16px;font-weight:bold;cursor:pointer}
-.btn-roja{background:#c1121f;color:white}.btn-blanca{background:white;color:#111}.btn-verde{background:#2a9d8f;color:white}.btn-azul{background:#1d3557;color:white}.btn-amarillo{background:#e9c46a;color:#111}
-canvas{width:100%;max-width:460px;aspect-ratio:1/1;background:#111126;border:3px solid #fff3;border-radius:18px;display:block;margin:10px auto;box-shadow:0 0 30px rgba(255,42,42,.3)}
-.controls{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;max-width:280px;margin:10px auto}
-.controls button{background:#2a2a3d;color:white;font-size:24px;padding:12px;border:2px solid #fff2}
-.controls button:active{background:#ff2a2a;transform:scale(.95)}
+.stat{background:#151522;border-radius:12px;padding:8px;font-size:12px;text-align:left;border:1px solid rgba(255,255,255,.05)}
+.barra{height:8px;background:#222;border-radius:10px;overflow:hidden;margin-top:4px}
+.relleno{height:100%;background:linear-gradient(90deg,#ff2a5f,#ffd166);transition:width .4s}
+button{width:100%;padding:14px;margin:6px 0;border:none;border-radius:14px;font-size:16px;font-weight:bold;cursor:pointer;transition:transform .1s, filter .2s}
+button:active{transform:scale(0.97)}
+.btn-roja{background:linear-gradient(135deg,#e63946,#d90429);color:white;box-shadow:0 4px 15px rgba(230,57,70,.4)}
+.btn-blanca{background:white;color:#111}
+.btn-verde{background:linear-gradient(135deg,#2a9d8f,#218380);color:white;box-shadow:0 4px 15px rgba(42,157,143,.4)}
+.btn-azul{background:linear-gradient(135deg,#1d3557,#457b9d);color:white;box-shadow:0 4px 15px rgba(29,53,87,.4)}
+canvas{width:100%;max-width:390px;aspect-ratio:1/1;background:#0d0d1a;border:3px solid rgba(255,255,255,.15);border-radius:18px;display:block;margin:10px auto;box-shadow:0 0 30px rgba(255,42,95,.2)}
+.controls{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;max-width:260px;margin:10px auto}
+.controls button{background:#22223b;color:white;font-size:22px;padding:12px;border:2px solid rgba(255,255,255,.1);border-radius:12px}
+.controls button:active{background:#ff2a5f;border-color:#ff2a5f}
 .controls .vacio{background:transparent;border:none}
-.pill{display:inline-block;background:#ffd166;color:#111;padding:5px 12px;border-radius:20px;font-weight:bold;font-size:13px;margin:3px}
-.leyenda{font-size:13px;color:#ddd;line-height:1.5;text-align:left;background:#0005;padding:10px;border-radius:12px}
+.pill{display:inline-block;background:#ffd166;color:#111;padding:4px 12px;border-radius:20px;font-weight:bold;font-size:13px;margin:3px;box-shadow:0 2px 10px rgba(255,209,102,.3)}
+.leyenda{font-size:13px;color:#ccc;line-height:1.4;text-align:left;background:rgba(0,0,0,.3);padding:10px;border-radius:12px;margin-top:8px}
 .mini{font-size:36px;line-height:1}
-.corazon{font-size:50px;animation:latir 1s infinite;display:inline-block}
-@keyframes latir{0%,100%{transform:scale(1)}50%{transform:scale(1.25)}}
+.corazon{font-size:45px;animation:latir 1s infinite;display:inline-block}
+@keyframes latir{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-50px);background:#ff2a5f;color:white;padding:10px 20px;border-radius:20px;font-weight:bold;box-shadow:0 5px 20px rgba(0,0,0,0.5);transition:transform .3s;z-index:1000;pointer-events:none}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.audio-btn{position:absolute;top:10px;right:10px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:white;padding:6px 12px;border-radius:10px;font-size:12px;cursor:pointer;width:auto}
 </style>
 </head>
 <body>
 <div class="fondo"></div>
+<button class="audio-btn" id="audioToggle" onclick="toggleAudio()">🔊 Audio: ON</button>
+<div id="toast" class="toast">¡Notificación!</div>
 <div class="cont"><div id="juego"></div></div>
+
 <script>
-let S={libertad:50,identidad:50,autoestima:50,vinculos:50};
-let nivelActual=0, corazones=0, corazonesTotal=0, vidas=3;
-let jugador={x:1,y:1}, salida={x:0,y:0}, fantasmas=[], intervaloFantasma=null;
-let mapas=[
+// --- MOTOR DE AUDIO WEB API ---
+let audioCtx = null;
+let sonidoActivado = true;
+
+function initAudio() {
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+}
+
+function playTone(freq, type, duration, vol=0.1) {
+  if (!sonidoActivado) return;
+  initAudio();
+  try {
+    let osc = audioCtx.createOscillator();
+    let gain = audioCtx.createGain();
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+    gain.gain.setValueAtTime(vol, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start();
+    osc.stop(audioCtx.currentTime + duration);
+  } catch(e){}
+}
+
+function toggleAudio() {
+  sonidoActivado = !sonidoActivado;
+  document.getElementById('audioToggle').textContent = sonidoActivado ? "🔊 Audio: ON" : "🔇 Audio: OFF";
+}
+
+function mostrarToast(txt) {
+  let t = document.getElementById('toast');
+  t.textContent = txt;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+// --- ESTADO DEL JUEGO ---
+let S = { libertad: 50, identidad: 50, autoestima: 50, vinculos: 50 };
+let nivelActual = 0, corazones = 0, corazonesTotal = 0, vidas = 3;
+let jugador = { x: 1, y: 1 }, salida = { x: 0, y: 0 }, fantasmas = [], intervaloFantasma = null;
+let animFrame = null, frameCount = 0;
+
+let mapas = [
   // NIVEL 1 - LIBERTAD
-  {titulo:"NIVEL 1 - LABERINTO BLANCO 🤍 - LIBERTAD", intro:"Leo está perdido entre Beatrice y Silvia. Recoge 3 corazones ❤️ y llega a la puerta 🚪. ¡No dejes que el fantasma 👻 de la duda te atrape!", mapa:[
-    [1,1,1,1,1,1,1,1,1,1,1,1,1],
-    [1,0,0,0,1,0,2,0,1,0,0,0,1],
-    [1,0,1,0,1,0,1,0,1,0,1,0,1],
-    [1,0,1,0,0,0,1,0,0,0,1,0,1],
-    [1,0,1,1,1,0,1,1,1,0,1,0,1],
-    [1,0,0,0,0,0,0,0,1,0,0,0,1],
-    [1,1,1,0,1,1,1,0,1,1,1,0,1],
-    [1,0,0,0,1,0,0,0,0,0,1,0,1],
-    [1,0,1,1,1,0,1,1,1,0,1,0,1],
-    [1,0,0,0,0,0,1,0,2,0,0,0,1],
-    [1,0,1,1,1,0,1,0,1,1,1,0,1],
-    [1,0,0,0,1,0,0,0,0,0,2,0,3],
-    [1,1,1,1,1,1,1,1,1,1,1,1,1]
-  ], fantasma:{x:6,y:5}},
-  // NIVEL 2 - IDENTIDAD / AUTOESTIMA
-  {titulo:"NIVEL 2 - LABERINTO DE ESPEJOS 🪞 - IDENTIDAD", intro:"¿Quién soy sin Beatrice? Recoge 3 espejos 🪞 y llega a la puerta. Tu identidad se está construyendo en cada paso.", mapa:[
-    [1,1,1,1,1,1,1,1,1,1,1,1,1],
-    [1,0,0,1,0,0,0,1,0,2,0,0,1],
-    [1,0,1,1,0,1,0,1,0,1,1,0,1],
-    [1,0,0,0,0,1,0,0,0,0,0,0,1],
-    [1,1,1,0,1,1,1,0,1,1,1,0,1],
-    [1,0,0,0,0,0,1,0,0,0,1,0,1],
-    [1,0,1,1,1,0,1,1,1,0,1,0,1],
-    [1,0,0,0,1,0,0,0,1,0,0,0,1],
-    [1,0,1,0,1,1,1,0,1,1,1,0,1],
-    [1,0,1,0,0,0,0,0,0,0,1,2,1],
-    [1,0,1,1,1,0,1,1,1,0,1,0,1],
-    [1,0,0,0,0,0,1,0,2,0,0,0,3],
-    [1,1,1,1,1,1,1,1,1,1,1,1,1]
-  ], fantasma:{x:5,y:6}},
+  {
+    titulo: "NIVEL 1 - LABERINTO BLANCO 🤍 - LIBERTAD", 
+    intro: "Leo está perdido entre Beatrice y Silvia. Recoge 3 corazones ❤️ y llega a la puerta 🚪. ¡Esquiva al fantasma 👻 de la duda!", 
+    mapa: [
+      [1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,0,0,0,1,0,2,0,1,0,0,0,1],
+      [1,0,1,0,1,0,1,0,1,0,1,0,1],
+      [1,0,1,0,0,0,1,0,0,0,1,0,1],
+      [1,0,1,1,1,0,1,1,1,0,1,0,1],
+      [1,0,0,0,0,0,0,0,1,0,0,0,1],
+      [1,1,1,0,1,1,1,0,1,1,1,0,1],
+      [1,0,0,0,1,0,0,0,0,0,1,0,1],
+      [1,0,1,1,1,0,1,1,1,0,1,0,1],
+      [1,0,0,0,0,0,1,0,2,0,0,0,1],
+      [1,0,1,1,1,0,1,0,1,1,1,0,1],
+      [1,0,0,0,1,0,0,0,0,0,2,0,3],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1]
+    ], 
+    fantasma: {x: 6, y: 5}
+  },
+  // NIVEL 2 - IDENTIDAD / AUTOESTIMA (Con niebla de visión)
+  {
+    titulo: "NIVEL 2 - LABERINTO DE ESPEJOS 🪞 - IDENTIDAD", 
+    intro: "¿Quién soy sin Beatrice? Recoge 3 espejos 🪞 en la oscuridad. Tu identidad se construye paso a paso.", 
+    mapa: [
+      [1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,0,0,1,0,0,0,1,0,2,0,0,1],
+      [1,0,1,1,0,1,0,1,0,1,1,0,1],
+      [1,0,0,0,0,1,0,0,0,0,0,0,1],
+      [1,1,1,0,1,1,1,0,1,1,1,0,1],
+      [1,0,0,0,0,0,1,0,0,0,1,0,1],
+      [1,0,1,1,1,0,1,1,1,0,1,0,1],
+      [1,0,0,0,1,0,0,0,1,0,0,0,1],
+      [1,0,1,0,1,1,1,0,1,1,1,0,1],
+      [1,0,1,0,0,0,0,0,0,0,1,2,1],
+      [1,0,1,1,1,0,1,1,1,0,1,0,1],
+      [1,0,0,0,0,0,1,0,2,0,0,0,3],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1]
+    ], 
+    fantasma: {x: 5, y: 6}
+  },
   // NIVEL 3 - VINCULOS
-  {titulo:"NIVEL 3 - LABERINTO ROJO ❤️ - VÍNCULOS", intro:"Ya casi sales. Recoge 3 abrazos 🤝 de tus amigos y tu profe, y llega al corazón final. ¡Pedir ayuda también es libertad!", mapa:[
-    [1,1,1,1,1,1,1,1,1,1,1,1,1],
-    [1,0,0,0,1,0,2,0,0,0,1,0,1],
-    [1,0,1,0,1,0,1,1,1,0,1,0,1],
-    [1,0,1,0,0,0,0,0,1,0,0,0,1],
-    [1,0,1,1,1,1,1,0,1,1,1,0,1],
-    [1,0,0,0,0,0,0,0,0,0,1,0,1],
-    [1,1,1,0,1,1,1,1,1,0,1,0,1],
-    [1,0,0,0,1,0,2,0,0,0,1,0,1],
-    [1,0,1,1,1,0,1,1,1,1,1,0,1],
-    [1,0,0,0,0,0,1,0,0,0,0,0,1],
-    [1,0,1,1,1,0,1,0,1,1,1,0,1],
-    [1,0,0,0,1,0,0,0,2,0,0,0,3],
-    [1,1,1,1,1,1,1,1,1,1,1,1,1]
-  ], fantasma:{x:6,y:7}}
+  {
+    titulo: "NIVEL 3 - LABERINTO ROJO ❤️ - VÍNCULOS", 
+    intro: "Ya casi sales. Recoge 3 abrazos 🤝 de tus amigos y tu profe. ¡Pedir ayuda también es libertad!", 
+    mapa: [
+      [1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,0,0,0,1,0,2,0,0,0,1,0,1],
+      [1,0,1,0,1,0,1,1,1,0,1,0,1],
+      [1,0,1,0,0,0,0,0,1,0,0,0,1],
+      [1,0,1,1,1,1,1,0,1,1,1,0,1],
+      [1,0,0,0,0,0,0,0,0,0,1,0,1],
+      [1,1,1,0,1,1,1,1,1,0,1,0,1],
+      [1,0,0,0,1,0,2,0,0,0,1,0,1],
+      [1,0,1,1,1,0,1,1,1,1,1,0,1],
+      [1,0,0,0,0,0,1,0,0,0,0,0,1],
+      [1,0,1,1,1,0,1,0,1,1,1,0,1],
+      [1,0,0,0,1,0,0,0,2,0,0,0,3],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1]
+    ], 
+    fantasma: {x: 6, y: 7}
+  }
 ];
 
-function barras(){return `<div class="stats">
-<div class="stat">🤍 Libertad<div class="barra"><div class="relleno" style="width:${S.libertad}%"></div></div>${S.libertad}%</div>
-<div class="stat">🧠 Identidad<div class="barra"><div class="relleno" style="width:${S.identidad}%"></div></div>${S.identidad}%</div>
-<div class="stat">❤️ Autoestima<div class="barra"><div class="relleno" style="width:${S.autoestima}%"></div></div>${S.autoestima}%</div>
-<div class="stat">🤝 Vínculos<div class="barra"><div class="relleno" style="width:${S.vinculos}%"></div></div>${S.vinculos}%</div></div>`}
-function render(h){document.getElementById('juego').innerHTML=h}
-
-function inicio(){
-  if(intervaloFantasma) clearInterval(intervaloFantasma);
-  S={libertad:50,identidad:50,autoestima:50,vinculos:50}; vidas=3;
-  render(`<div class="corazon">❤️‍🩹</div><h1>LA AUTOPSIA <span>DE LEO</span><br>LABERINTO</h1><p class="sub">Blanca como la nieve, roja como la sangre</p>
-  <div style="font-size:60px">👦 👩‍🦰 👩 👨‍🏫</div>
-  <div class="burbuja">👦 Leo: "Estoy perdido en mi propio laberinto..."</div>
-  <div class="carta"><p>Leo está atrapado en su cabeza.<br><b>Tú tienes que sacarlo.</b><br><br>3 laberintos = 3 cortes de tu clase</p>
-  <div class="leyenda">🤍 <b>Lab 1:</b> Libertad - 1er Corte<br>🧠 <b>Lab 2:</b> Identidad + Autoestima - 2do Corte<br>🤝 <b>Lab 3:</b> Vínculos - 3er Corte<br><br>❤️ Recoge corazones &nbsp; 👻 Esquiva al fantasma &nbsp; 🚪 Llega a la puerta</div></div>
-  ${barras()}
-  <button class="btn-roja" onclick="empezarLab(0)">🚪 ENTRAR AL LABERINTO</button>
-  <small>Persona • Libertad • Identidad • Autoestima • Personalidad • Familia y Amistad<br>Wonder - El Estudiante - Blanca como la nieve</small>`);
+function barras() {
+  return `<div class="stats">
+    <div class="stat">🤍 Libertad<div class="barra"><div class="relleno" style="width:${S.libertad}%"></div></div>${S.libertad}%</div>
+    <div class="stat">🧠 Identidad<div class="barra"><div class="relleno" style="width:${S.identidad}%"></div></div>${S.identidad}%</div>
+    <div class="stat">❤️ Autoestima<div class="barra"><div class="relleno" style="width:${S.autoestima}%"></div></div>${S.autoestima}%</div>
+    <div class="stat">🤝 Vínculos<div class="barra"><div class="relleno" style="width:${S.vinculos}%"></div></div>${S.vinculos}%</div>
+  </div>`;
 }
 
-function empezarLab(n){
-  nivelActual=n; let m=mapas[n];
-  jugador={x:1,y:1}; corazones=0; corazonesTotal=0;
-  // contar items 2
-  m.mapa.forEach(f=>f.forEach(c=>{if(c==2) corazonesTotal++}));
-  fantasmas=[{x:m.fantasma.x,y:m.fantasma.y}];
-  // encontrar salida
-  m.mapa.forEach((f,y)=>f.forEach((c,x)=>{if(c==3) salida={x,y}}));
-  render(`<div style="font-size:12px;letter-spacing:2px;color:#ffd166">${m.titulo}</div>
-  <div><span class="pill">❤️ ${corazones}/${corazonesTotal}</span> <span class="pill">💛 Vidas: ${vidas}</span> <span class="pill">👦 Leo</span></div>
-  <div class="carta"><p style="margin:4px">${m.intro}</p></div>
-  ${barras()}
-  <canvas id="cv" width="390" height="390"></canvas>
-  <div class="controls">
-    <div class="vacio"></div><button onclick="mover(0,-1)">⬆️</button><div class="vacio"></div>
-    <button onclick="mover(-1,0)">⬅️</button><button onclick="mover(0,1)">⬇️</button><button onclick="mover(1,0)">➡️</button>
-  </div>
-  <div class="leyenda">🟦 Pared &nbsp; ⬜ Camino &nbsp; ❤️ / 🪞 / 🤝 Recoger &nbsp; 🚪 Salida (se abre con todos los ❤️)</div>`);
-  dibujar();
-  if(intervaloFantasma) clearInterval(intervaloFantasma);
-  intervaloFantasma=setInterval(moverFantasma, 650);
-  document.onkeydown=(e)=>{
-    if(e.key=="ArrowUp"||e.key=="w") mover(0,-1);
-    if(e.key=="ArrowDown"||e.key=="s") mover(0,1);
-    if(e.key=="ArrowLeft"||e.key=="a") mover(-1,0);
-    if(e.key=="ArrowRight"||e.key=="d") mover(1,0);
+function render(h) { document.getElementById('juego').innerHTML = h; }
+
+function inicio() {
+  if (intervaloFantasma) clearInterval(intervaloFantasma);
+  if (animFrame) cancelAnimationFrame(animFrame);
+  S = { libertad: 50, identidad: 50, autoestima: 50, vinculos: 50 }; 
+  vidas = 3;
+  playTone(300, 'sine', 0.5);
+  render(`
+    <div class="corazon">❤️‍🩹</div>
+    <h1>LA AUTOPSIA <span>DE LEO</span><br>LABERINTO</h1>
+    <p class="sub">Blanca como la nieve, roja como la sangre</p>
+    <div style="font-size:50px; margin: 8px">👦 👩‍🦰 👩 👨‍🏫</div>
+    <div class="burbuja">👦 Leo: "Estoy perdido en mi propio laberinto..."</div>
+    <div class="carta">
+      <p>Leo está atrapado en su mente.<br><b>Tú tienes que sacarlo.</b><br><br>3 laberintos mentales = 3 cortes de tu clase</p>
+      <div class="leyenda">🤍 <b>Lab 1:</b> Libertad<br>🧠 <b>Lab 2:</b> Identidad (Niebla mágica)<br>🤝 <b>Lab 3:</b> Vínculos<br><br>❤️ Recoge objetos &nbsp; 👻 Esquiva al fantasma &nbsp; 🚪 Llega a la puerta</div>
+    </div>
+    ${barras()}
+    <button class="btn-roja" onclick="empezarLab(0)">🚪 ENTRAR AL LABERINTO</button>
+    <small style="color:#888; display:block; margin-top:10px">Persona • Libertad • Identidad • Autoestima • Personalidad • Familia</small>
+  `);
+}
+
+function empezarLab(n) {
+  nivelActual = n; 
+  let m = mapas[n];
+  jugador = { x: 1, y: 1 }; 
+  corazones = 0; 
+  corazonesTotal = 0;
+  m.mapa.forEach(f => f.forEach(c => { if (c == 2) corazonesTotal++; }));
+  fantasmas = [{ x: m.fantasma.x, y: m.fantasma.y }];
+  m.mapa.forEach((f, y) => f.forEach((c, x) => { if (c == 3) salida = { x, y }; }));
+
+  render(`
+    <div style="font-size:11px;letter-spacing:2px;color:#ffd166;font-weight:bold">${m.titulo}</div>
+    <div style="margin: 6px 0">
+      <span class="pill" id="pillCorazones">❤️ ${corazones}/${corazonesTotal}</span> 
+      <span class="pill" id="pillVidas">💛 Vidas: ${vidas}</span> 
+      <span class="pill">👦 Leo</span>
+    </div>
+    <div class="carta" style="padding:10px;"><p style="margin:2px;font-size:13px">${m.intro}</p></div>
+    ${barras()}
+    <canvas id="cv" width="390" height="390"></canvas>
+    <div class="controls">
+      <div class="vacio"></div><button onclick="mover(0,-1)">⬆️</button><div class="vacio"></div>
+      <button onclick="mover(-1,0)">⬅️</button><button onclick="mover(0,1)">⬇️</button><button onclick="mover(1,0)">➡️</button>
+    </div>
+    <div class="leyenda">🟦 Pared &nbsp; ❤️ / 🪞 / 🤝 Ítems &nbsp; 🚪 Salida (se abre con todos los ítems)</div>
+  `);
+
+  if (intervaloFantasma) clearInterval(intervaloFantasma);
+  intervaloFantasma = setInterval(moverFantasma, 600);
+
+  // Control por teclado
+  document.onkeydown = (e) => {
+    if (["ArrowUp","w","W"].includes(e.key)) { mover(0,-1); e.preventDefault(); }
+    if (["ArrowDown","s","S"].includes(e.key)) { mover(0,1); e.preventDefault(); }
+    if (["ArrowLeft","a","A"].includes(e.key)) { mover(-1,0); e.preventDefault(); }
+    if (["ArrowRight","d","D"].includes(e.key)) { mover(1,0); e.preventDefault(); }
   };
+
+  iniciarLoopAnimacion();
 }
 
-function dibujar(){
-  let cv=document.getElementById('cv'); if(!cv) return;
-  let ctx=cv.getContext('2d'); let m=mapas[nivelActual].mapa; let tam=30;
-  for(let y=0;y<13;y++) for(let x=0;x<13;x++){
-    let v=m[y][x];
-    if(v==1){ctx.fillStyle="#2b2b4a";ctx.fillRect(x*tam,y*tam,tam,tam);ctx.strokeStyle="#ffffff22";ctx.strokeRect(x*tam,y*tam,tam,tam);}
-    else{ctx.fillStyle="#e8e8f5";ctx.fillRect(x*tam,y*tam,tam,tam);ctx.strokeStyle="#00000010";ctx.strokeRect(x*tam,y*tam,tam,tam);}
-    if(v==2){ctx.font="20px Arial";ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(nivelActual==0?"❤️":nivelActual==1?"🪞":"🤝", x*tam+15, y*tam+16);}
-    if(v==3){ctx.font="20px Arial";ctx.textAlign="center";ctx.fillText(corazones>=corazonesTotal?"🚪":"🔒", x*tam+15, y*tam+20);}
+function iniciarLoopAnimacion() {
+  if (animFrame) cancelAnimationFrame(animFrame);
+  function loop() {
+    frameCount++;
+    dibujar();
+    animFrame = requestAnimationFrame(loop);
   }
-  // fantasmas
-  fantasmas.forEach(f=>{ctx.font="22px Arial";ctx.textAlign="center";ctx.fillText("👻", f.x*tam+15, f.y*tam+20);});
-  // jugador
-  ctx.font="22px Arial";ctx.textAlign="center";ctx.fillText("👦", jugador.x*tam+15, jugador.y*tam+20);
-  // HUD arriba
-  let hud=document.querySelector('.pill'); // no necesario
+  loop();
 }
 
-function mover(dx,dy){
-  let m=mapas[nivelActual].mapa;
-  let nx=jugador.x+dx, ny=jugador.y+dy;
-  if(nx<0||ny<0||nx>=13||ny>=13) return;
-  if(m[ny][nx]==1) return;
-  jugador.x=nx; jugador.y=ny;
-  if(m[ny][nx]==2){
-    m[ny][nx]=0; corazones++;
-    if(nivelActual==0){S.libertad+=12;S.autoestima+=8;}
-    if(nivelActual==1){S.identidad+=12;S.autoestima+=10;}
-    if(nivelActual==2){S.vinculos+=12;S.autoestima+=8;}
-    for(let k in S) S[k]=Math.max(0,Math.min(100,S[k]));
-    // actualizar pills y barras sin recargar todo
-    let pills=document.querySelectorAll('.pill');
-    if(pills[0]) pills[0].textContent=`❤️ ${corazones}/${corazonesTotal}`;
-    let stats=document.querySelector('.stats'); if(stats) stats.outerHTML=barras();
+function dibujar() {
+  let cv = document.getElementById('cv'); 
+  if (!cv) return;
+  let ctx = cv.getContext('2d'); 
+  let m = mapas[nivelActual].mapa; 
+  let tam = 30;
+  ctx.clearRect(0, 0, 390, 390);
+
+  for (let y = 0; y < 13; y++) {
+    for (let x = 0; x < 13; x++) {
+      let v = m[y][x];
+      // Niebla de guerra para el Nivel 2
+      let enNiebla = false;
+      if (nivelActual == 1) {
+        let dist = Math.hypot(jugador.x - x, jugador.y - y);
+        if (dist > 3.8) enNiebla = true;
+      }
+
+      if (enNiebla) {
+        ctx.fillStyle = "#07070f";
+        ctx.fillRect(x * tam, y * tam, tam, tam);
+        continue;
+      }
+
+      if (v == 1) {
+        ctx.fillStyle = "#1b1b3a"; 
+        ctx.fillRect(x * tam, y * tam, tam, tam);
+        ctx.strokeStyle = "#ffffff11"; 
+        ctx.strokeRect(x * tam, y * tam, tam, tam);
+      } else {
+        ctx.fillStyle = "#e8e8f5"; 
+        ctx.fillRect(x * tam, y * tam, tam, tam);
+        ctx.strokeStyle = "#00000010"; 
+        ctx.strokeRect(x * tam, y * tam, tam, tam);
+      }
+
+      if (v == 2) {
+        ctx.font = "18px Arial"; 
+        ctx.textAlign = "center"; 
+        ctx.textBaseline = "middle";
+        let iconoItem = nivelActual == 0 ? "❤️" : nivelActual == 1 ? "🪞" : "🤝";
+        ctx.fillText(iconoItem, x * tam + 15, y * tam + 16);
+      }
+      if (v == 3) {
+        ctx.font = "18px Arial"; 
+        ctx.textAlign = "center"; 
+        ctx.textBaseline = "middle";
+        ctx.fillText(corazones >= corazonesTotal ? "🚪" : "🔒", x * tam + 15, y * tam + 16);
+      }
+    }
   }
-  // choque fantasma
-  if(fantasmas.some(f=>f.x==jugador.x && f.y==jugador.y)){
-    vidas--; if(vidas<=0){perder(); return;}
-    alert("👻 ¡Te atrapó el fantasma de la duda! Te quedan "+vidas+" vidas. Vuelves al inicio.");
-    jugador={x:1,y:1};
-    let pills=document.querySelectorAll('.pill'); if(pills[1]) pills[1].textContent=`💛 Vidas: ${vidas}`;
-  }
-  // salida
-  if(jugador.x==salida.x && jugador.y==salida.y){
-    if(corazones>=corazonesTotal){ganarLab(); return;}
-    else{alert("🔒 La puerta está cerrada. Te faltan "+(corazonesTotal-corazones)+" corazones."); jugador={x:salida.x-1,y:salida.y}; }
-  }
-  dibujar();
+
+  // Dibujar fantasmas con efecto flotante
+  fantasmas.forEach(f => {
+    ctx.font = "20px Arial"; 
+    ctx.textAlign = "center"; 
+    ctx.textBaseline = "middle";
+    let flotar = Math.sin(frameCount * 0.1) * 2;
+    ctx.fillText("👻", f.x * tam + 15, f.y * tam + 16 + flotar);
+  });
+
+  // Dibujar jugador con animación de pulso
+  ctx.font = "21px Arial"; 
+  ctx.textAlign = "center"; 
+  ctx.textBaseline = "middle";
+  ctx.fillText("👦", jugador.x * tam + 15, jugador.y * tam + 16);
 }
 
-function moverFantasma(){
-  let m=mapas[nivelActual].mapa;
-  fantasmas.forEach(f=>{
-    let opciones=[[1,0],[-1,0],[0,1],[0,-1]].filter(([dx,dy])=>{let nx=f.x+dx, ny=f.y+dy; return nx>=0&&ny>=0&&nx<13&&ny<13&&m[ny][nx]!=1;});
-    // persigue un poco a Leo
-    opciones.sort((a,b)=>{
-      let da=Math.abs((f.x+a[0])-jugador.x)+Math.abs((f.y+a[1])-jugador.y);
-      let db=Math.abs((f.x+b[0])-jugador.x)+Math.abs((f.y+b[1])-jugador.y);
-      return da-db;
+function mover(dx, dy) {
+  let m = mapas[nivelActual].mapa;
+  let nx = jugador.x + dx, ny = jugador.y + dy;
+  if (nx < 0 || ny < 0 || nx >= 13 || ny >= 13) return;
+  if (m[ny][nx] == 1) return;
+
+  jugador.x = nx; 
+  jugador.y = ny;
+  playTone(500, 'triangle', 0.08);
+
+  if (m[ny][nx] == 2) {
+    m[ny][nx] = 0; 
+    corazones++;
+    playTone(880, 'sine', 0.15);
+    if (nivelActual == 0) { S.libertad += 15; S.autoestima += 10; }
+    if (nivelActual == 1) { S.identidad += 15; S.autoestima += 10; }
+    if (nivelActual == 2) { S.vinculos += 15; S.autoestima += 10; }
+    for (let k in S) S[k] = Math.max(0, Math.min(100, S[k]));
+
+    mostrarToast("¡Ítem recolectado! +Puntos");
+    let pC = document.getElementById('pillCorazones');
+    if (pC) pC.textContent = `❤️ ${corazones}/${corazonesTotal}`;
+    let statsDiv = document.querySelector('.stats'); 
+    if (statsDiv) statsDiv.outerHTML = barras();
+  }
+
+  // Comprobar colisión con fantasma
+  if (fantasmas.some(f => f.x == jugador.x && f.y == jugador.y)) {
+    impactoFantasma();
+    return;
+  }
+
+  // Comprobar salida
+  if (jugador.x == salida.x && jugador.y == salida.y) {
+    if (corazones >= corazonesTotal) {
+      ganarLab(); 
+      return;
+    } else {
+      mostrarToast(`🔒 Te faltan ${corazonesTotal - corazones} ítems.`);
+      playTone(150, 'sawtooth', 0.2);
+      jugador.x = salida.x - 1; 
+    }
+  }
+}
+
+function moverFantasma() {
+  let m = mapas[nivelActual].mapa;
+  fantasmas.forEach(f => {
+    let opciones = [[1,0],[-1,0],[0,1],[0,-1]].filter(([dx,dy]) => {
+      let nx = f.x + dx, ny = f.y + dy;
+      return nx >= 0 && ny >= 0 && nx < 13 && ny < 13 && m[ny][nx] != 1;
     });
-    if(opciones.length && Math.random()<0.75){f.x+=opciones[0][0]; f.y+=opciones[0][1];}
-    if(f.x==jugador.x && f.y==jugador.y){
-      vidas--; if(vidas<=0){perder(); return;}
-      alert("👻 ¡Te atrapó! Te quedan "+vidas+" vidas");
-      jugador={x:1,y:1};
-      let pills=document.querySelectorAll('.pill'); if(pills[1]) pills[1].textContent=`💛 Vidas: ${vidas}`;
+    opciones.sort((a,b) => {
+      let da = Math.abs((f.x + a[0]) - jugador.x) + Math.abs((f.y + a[1]) - jugador.y);
+      let db = Math.abs((f.x + b[0]) - jugador.x) + Math.abs((f.y + b[1]) - jugador.y);
+      return da - db;
+    });
+    if (opciones.length && Math.random() < 0.8) {
+      f.x += opciones[0][0]; 
+      f.y += opciones[0][1];
+    }
+    if (f.x == jugador.x && f.y == jugador.y) {
+      impactoFantasma();
     }
   });
-  dibujar();
 }
 
-function ganarLab(){
+function impactoFantasma() {
+  vidas--;
+  playTone(120, 'sawtooth', 0.4);
+  if (vidas <= 0) {
+    perder(); 
+    return;
+  }
+  mostrarToast(`👻 ¡Te atrapó la duda! Vidas: ${vidas}`);
+  jugador = { x: 1, y: 1 };
+  let pV = document.getElementById('pillVidas'); 
+  if (pV) pV.textContent = `💛 Vidas: ${vidas}`;
+}
+
+function ganarLab() {
   clearInterval(intervaloFantasma);
-  if(nivelActual==0){
-    render(`<div class="carta"><div class="mini">🚪🤍❤️</div><h2>¡PASASTE EL LAB 1!</h2><p><b>LIBERTAD:</b> Elegiste no quedarte pegado a lo imposible. Libertad es elegir con sentido, no huir.</p><p class="burbuja">👦 Leo: "Ya no quiero solo desear, quiero decidir."</p>${barras()}<button class="btn-azul" onclick="empezarLab(1)">➡️ SIGUIENTE LABERINTO: IDENTIDAD</button></div>`);
-  } else if(nivelActual==1){
-    render(`<div class="carta"><div class="mini">🪞🧠❤️</div><h2>¡PASASTE EL LAB 2!</h2><p><b>IDENTIDAD + AUTOESTIMA:</b> Como Auggie en <b>Wonder</b>, ya no eres solo lo que otros ven. Eres competente y merecedor.</p><p><b>Personalidad:</b> Neuroticismo alto, pero tu carácter ya decide cuidar.</p>${barras()}<button class="btn-verde" onclick="empezarLab(2)">➡️ ÚLTIMO LABERINTO: VÍNCULOS</button></div>`);
+  if (animFrame) cancelAnimationFrame(animFrame);
+  playTone(600, 'sine', 0.1); setTimeout(() => playTone(800, 'sine', 0.2), 150);
+
+  if (nivelActual == 0) {
+    render(`
+      <div class="carta">
+        <div class="mini">🚪🤍❤️</div>
+        <h2>¡PASASTE EL LAB 1!</h2>
+        <p><b>LIBERTAD:</b> Elegiste no quedarte pegado a lo imposible. Libertad es decidir con sentido, no huir.</p>
+        <p class="burbuja">👦 Leo: "Ya no quiero solo desear, quiero decidir."</p>
+        ${barras()}
+        <button class="btn-azul" onclick="empezarLab(1)">➡️ SIGUIENTE: IDENTIDAD</button>
+      </div>
+    `);
+  } else if (nivelActual == 1) {
+    render(`
+      <div class="carta">
+        <div class="mini">🪞🧠❤️</div>
+        <h2>¡PASASTE EL LAB 2!</h2>
+        <p><b>IDENTIDAD + AUTOESTIMA:</b> Como Auggie en <b>Wonder</b>, ya no eres solo lo que otros ven. Eres competente y valioso.</p>
+        ${barras()}
+        <button class="btn-verde" onclick="empezarLab(2)">➡️ ÚLTIMO LABERINTO: VÍNCULOS</button>
+      </div>
+    `);
   } else {
     final();
   }
 }
-function perder(){
+
+function perder() {
   clearInterval(intervaloFantasma);
-  render(`<div class="carta"><div style="font-size:60px">👻</div><h2>LEO SE PERDIÓ EN EL LABERINTO</h2><p>El fantasma de la duda te atrapó 3 veces. Pero como <b>Chano en El Estudiante</b>, a los 70 años se puede volver a empezar.</p>${barras()}<button class="btn-roja" onclick="inicio()">🔁 VOLVER A INTENTAR</button></div>`);
+  if (animFrame) cancelAnimationFrame(animFrame);
+  playTone(100, 'square', 0.5);
+  render(`
+    <div class="carta">
+      <div style="font-size:55px">👻</div>
+      <h2>LEO SE PERDIÓ</h2>
+      <p>El fantasma de la duda te atrapó. Pero como <b>Chano en El Estudiante</b>, a los 70 años siempre se puede volver a empezar.</p>
+      ${barras()}
+      <button class="btn-roja" onclick="inicio()">🔁 VOLVER A INTENTAR</button>
+    </div>
+  `);
 }
-function final(){
+
+function final() {
+  if (animFrame) cancelAnimationFrame(animFrame);
+  playTone(523.25, 'sine', 0.1); setTimeout(() => playTone(659.25, 'sine', 0.1), 150); setTimeout(() => playTone(783.99, 'sine', 0.3), 300);
+
   let titulo, texto, nota, emoji;
-  if(S.autoestima>=60 && S.vinculos>=55){titulo="FINAL ROJO - LEO APRENDE A AMAR";texto="Saliste del laberinto. Entendiste que amar no es poseer, es dejar libre. Tu autoestima subió porque te sentiste competente y merecedor. Como Chano, te atreviste a empezar de nuevo.";nota="NOTA: 5.0";emoji="🎉👦❤️"}
-  else{titulo="FINAL EN CONSTRUCCIÓN - LEO CASI SALE";texto="Saliste del laberinto, pero aún te falta sostenerte en tus vínculos. Eso también es crecer. Vuelve a jugar y recoge todos los corazones.";nota="NOTA: 4.5 - Casi 5.0";emoji="❤️‍🩹👦"}
-  render(`<div class="carta"><h2>${emoji}<br>${titulo}</h2><p>${texto}</p>${barras()}<span class="pill">${nota}</span><div style="font-size:50px;margin:10px">👦 👩 👯 👨‍🏫</div><p><b>Reflexión final:</b><br>¿Qué parte de Leo reconoces en ti? Escríbelo, eso es autoconocimiento.</p></div><button class="btn-roja" onclick="inicio()">🔁 VOLVER A JUGAR</button>`);
+  if (S.autoestima >= 60 && S.vinculos >= 55) {
+    titulo = "FINAL ÉPICO - LEO APRENDE A AMAR";
+    texto = "Saliste victorioso del laberinto mental. Entendiste que amar no es poseer, es dejar libre. Tu autoestima se consolidó.";
+    nota = "NOTA: 5.0 - ¡EXCELENTE!";
+    emoji = "🎉👦❤️";
+  } else {
+    titulo = "FINAL REFLEXIVO - CASI LO LOGRAS";
+    texto = "Saliste del laberinto, pero aún te falta sostenerte profundamente en tus vínculos. Eso también es parte de crecer.";
+    nota = "NOTA: 4.5";
+    emoji = "❤️‍🩹👦";
+  }
+
+  render(`
+    <div class="carta">
+      <h2>${emoji}<br>${titulo}</h2>
+      <p>${texto}</p>
+      ${barras()}
+      <span class="pill" style="font-size:15px; margin: 8px 0">${nota}</span>
+      <div style="font-size:45px;margin:8px">👦 👩 👯 👨‍🏫</div>
+      <p style="font-size:12px"><b>Reflexión final:</b><br>¿Qué parte de Leo reconoces en ti? Escríbelo, eso es autoconocimiento puro.</p>
+    </div>
+    <button class="btn-roja" onclick="inicio()">🔁 VOLVER A JUGAR</button>
+  `);
 }
+
+// Inicializar juego al cargar
 inicio();
 </script>
 </body>
